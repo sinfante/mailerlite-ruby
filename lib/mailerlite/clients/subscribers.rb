@@ -13,6 +13,26 @@ module MailerLite
         connection.get("subscribers/#{identifier}")
       end
 
+      # Create new subscriber
+      #
+      # @see https://developers.mailerlite.com/v2/reference#create-a-subscriber
+      #
+      # @param email   [String] Email of subscriber
+      # @param name    [String] Name of your subscriber
+      # @param type    [String] Type of subscriber, available values: subscribed, active, unconfirmed
+      # @param fields  [Object] Object that contains your custom fields. i.e. company, city, state, etc.
+      #
+      # @return [Hash] Response from API.
+      def create_subscriber(email, name, type, fields = {})
+        params = {
+          email: email,
+          name: name,
+          type: type,
+          fields: fields
+        }
+        connection.post('subscribers', params)
+      end
+
       # Update single subscriber
       #
       # @see https://developers.mailerlite.com/v2/reference#update-subscriber
